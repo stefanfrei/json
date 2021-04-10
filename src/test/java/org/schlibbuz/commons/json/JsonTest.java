@@ -45,7 +45,7 @@ public class JsonTest {
 
     /**
      * tests all kinds of stuff
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException - in case the file is not found or is not readable
      */
     @Test
     public void blaa() throws FileNotFoundException {

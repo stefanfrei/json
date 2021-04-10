@@ -83,7 +83,7 @@ public class Json {
     /**
      * Constructor
      * @param String fileName - path to json-file
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException - in case the file is not found or is not readable
      */
     private Json(String fileName) throws FileNotFoundException {
         f = new File("src/test/resources/simple.json");
@@ -94,7 +94,7 @@ public class Json {
     /**
      * Constructor
      * @param File f - json-file
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException - in case the file is not found or is not readable
      */
     private Json(File f) throws FileNotFoundException {
         this.f = f;
@@ -105,7 +105,7 @@ public class Json {
      *
      * @param fileName
      * @return
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException - in case the file is not found or is not readable
      */
     public static Json fromFile(String fileName) throws FileNotFoundException {
         return new Json(fileName);
@@ -115,7 +115,7 @@ public class Json {
      *
      * @param file
      * @return
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException - in case the file is not found or is not readable
      */
     public static Json fromFile(File file) throws FileNotFoundException {
         return new Json(file);
@@ -124,7 +124,7 @@ public class Json {
     /**
      * build a HashMap from json data file
      * @return a map
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException - in case the file is not found or is not readable
      */
     Map<String, String> buildMap() throws FileNotFoundException {
         if (!f.exists()) throw new FileNotFoundException("File is not there");
