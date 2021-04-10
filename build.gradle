@@ -43,7 +43,6 @@ release {
 }
 
 repositories {
-    // Use JCenter for resolving dependencies.
     mavenLocal()
     mavenCentral()
     jcenter()
