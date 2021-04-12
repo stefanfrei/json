@@ -38,11 +38,31 @@ import java.util.Map;
 public interface JsonParser {
 
     /**
+     * The number of bytes in a kilobyte.
+     */
+    public static final long ONE_KB = 1024;
+
+    /**
+     * The number of bytes in a megabyte.
+     */
+    public static final long ONE_MB = ONE_KB * ONE_KB;
+
+    /**
      * predefined charset UTF-8
      */
     static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
-    static final int DEFAULT_BUFFER_SIZE = 8192;
 
+    /**
+     * Standard buffer-size 8 KB
+     */
+    static final int DEFAULT_BUFFER_SIZE = (int)(8 * ONE_KB);
+
+    /**
+     *
+     * @param f - the json to produce the map from
+     * @return - a map representing the json
+     * @throws IOException - in case of error
+     */
     static Map<String, String> mapOf(File f) throws IOException {
         try (
                 FileInputStream stream = new FileInputStream(f);
@@ -50,18 +70,10 @@ public interface JsonParser {
                         new InputStreamReader(stream, DEFAULT_CHARSET)
                 );
         ) {
-            JsonParser instance;
-            if (f.length() > (long)(10 * DEFAULT_BUFFER_SIZE)) {
-                instance = ThreadedParser.of(reader.lines());
-            } else {
-                instance = BasicParser.of(reader.lines());
+            if (f.length() > ONE_MB) {
+                return ThreadedParser.of(reader.lines()).buildJsonMap();
             }
-            return instance.buildJsonMap();
-        } catch(IOException e) {
-            // fatal!
-            throw new IOException(e);
-        }
+            return BasicParser.of(reader.lines()).buildJsonMap();
+        } catch(IOException e) { throw new IOException(e); }
     }
-
-    Map<String, String> buildJsonMap();
 }

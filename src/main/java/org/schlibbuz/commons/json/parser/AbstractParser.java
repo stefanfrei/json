@@ -22,6 +22,7 @@
  */
 package org.schlibbuz.commons.json.parser;
 
+import java.util.Map;
 import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,4 +44,6 @@ abstract class AbstractParser implements JsonParser {
     AbstractParser(Stream<String> data) {
         this.data = data;
     }
+
+    abstract Map<String, String> buildJsonMap();
 }

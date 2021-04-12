@@ -44,7 +44,7 @@ public class BasicParser extends AbstractParser {
         super(data);
     }
 
-    static JsonParser of(Stream<String> data) {
+    static BasicParser of(Stream<String> data) {
         return new BasicParser(data);
     }
 
