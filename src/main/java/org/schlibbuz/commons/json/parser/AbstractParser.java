@@ -22,9 +22,6 @@
  */
 package org.schlibbuz.commons.json.parser;
 
-import java.io.File;
-import java.util.Collections;
-import java.util.Map;
 import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,27 +30,17 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Stefan Frei <stefan.a.frei@gmail.com>
  */
-class AbstractJsonParser implements JsonParser {
+abstract class AbstractParser implements JsonParser {
 
     /**
      * logger
      */
-    private final static Logger w = LogManager.getLogger(AbstractJsonParser.class);
+    private final static Logger w = LogManager.getLogger(AbstractParser.class);
 
     final Stream<String> data;
 
 
-    AbstractJsonParser(Stream<String> data) {
+    AbstractParser(Stream<String> data) {
         this.data = data;
-    }
-
-    public void eat(String line) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Map<String, String> getJsonMap() {
-        data.forEachOrdered(w::trace);
-        return Collections.emptyMap();
     }
 }

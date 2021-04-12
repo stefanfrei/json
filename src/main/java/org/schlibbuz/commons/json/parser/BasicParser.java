@@ -22,19 +22,35 @@
  */
 package org.schlibbuz.commons.json.parser;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.stream.Stream;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
  * @author Stefan Frei <stefan.a.frei@gmail.com>
  */
-public class JsonBasicParser extends AbstractJsonParser {
+public class BasicParser extends AbstractParser {
 
-    private JsonBasicParser(Stream<String> data) {
+    /**
+     * logger
+     */
+    private final static Logger w = LogManager.getLogger(BasicParser.class);
+
+
+    private BasicParser(Stream<String> data) {
         super(data);
     }
 
     static JsonParser of(Stream<String> data) {
-        return new JsonBasicParser(data);
+        return new BasicParser(data);
+    }
+
+    @Override
+    public Map<String, String> buildJsonMap() {
+        super.data.forEachOrdered(w::trace);
+        return Collections.emptyMap();
     }
 }

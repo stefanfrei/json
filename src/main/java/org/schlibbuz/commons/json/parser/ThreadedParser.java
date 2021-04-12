@@ -22,19 +22,25 @@
  */
 package org.schlibbuz.commons.json.parser;
 
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
  *
  * @author Stefan Frei <stefan.a.frei@gmail.com>
  */
-public class JsonObjectParser extends AbstractJsonParser {
+public class ThreadedParser extends AbstractParser {
 
-    private JsonObjectParser(Stream<String> data) {
+    private ThreadedParser(Stream<String> data) {
         super(data.parallel());
     }
 
-    static JsonObjectParser of(Stream<String> data) {
-        return new JsonObjectParser(data);
+    static ThreadedParser of(Stream<String> data) {
+        return new ThreadedParser(data);
+    }
+
+    @Override
+    public Map<String, String> buildJsonMap() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -40,8 +40,8 @@ public interface JsonParser {
     /**
      * predefined charset UTF-8
      */
-    public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
-    public static final int DEFAULT_BUFFER_SIZE = 8192;
+    static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
+    static final int DEFAULT_BUFFER_SIZE = 8192;
 
     static Map<String, String> mapOf(File f) throws IOException {
         try (
@@ -52,16 +52,16 @@ public interface JsonParser {
         ) {
             JsonParser instance;
             if (f.length() > (long)(10 * DEFAULT_BUFFER_SIZE)) {
-                instance = JsonObjectParser.of(reader.lines());
+                instance = ThreadedParser.of(reader.lines());
             } else {
-                instance = JsonBasicParser.of(reader.lines());
+                instance = BasicParser.of(reader.lines());
             }
-            return instance.getJsonMap();
+            return instance.buildJsonMap();
         } catch(IOException e) {
             // fatal!
             throw new IOException(e);
         }
     }
 
-    Map<String, String> getJsonMap();
+    Map<String, String> buildJsonMap();
 }
