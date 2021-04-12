@@ -26,6 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.schlibbuz.commons.json.parser.area.JsonArea;
+import org.schlibbuz.commons.json.parser.area.ObjOpener;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -52,6 +54,7 @@ public class JsonTest {
     @DataProvider
     @Test
     public void blaa() throws IOException {
-        var i = Json.of(JSON_FILE);
+        JsonArea ja = new ObjOpener();
+        ja.validate(" { \"");
     }
 }

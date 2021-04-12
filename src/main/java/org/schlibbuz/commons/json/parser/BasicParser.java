@@ -42,6 +42,7 @@ public class BasicParser extends AbstractParser {
 
     private BasicParser(Stream<String> data) {
         super(data);
+        jat = JsonAreaType.OBJ_START;
     }
 
     static BasicParser of(Stream<String> data) {
@@ -50,7 +51,11 @@ public class BasicParser extends AbstractParser {
 
     @Override
     public Map<String, String> buildJsonMap() {
-        super.data.forEachOrdered(w::trace);
+        data.forEach(this::printzz);
         return Collections.emptyMap();
+    }
+
+    public void printzz(String x) {
+        w.trace(x);
     }
 }

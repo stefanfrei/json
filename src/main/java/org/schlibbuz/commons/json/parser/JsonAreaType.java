@@ -23,6 +23,7 @@
 package org.schlibbuz.commons.json.parser;
 
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -30,32 +31,50 @@ import java.util.function.Predicate;
  */
 public enum JsonAreaType {
 
-    OBJ_START("obj-opener", (c) -> " {\t\n".indexOf((char)c) > -1, "\""),
-    NAME("obj-opener", (c) -> "\"".indexOf((char)c) == -1, ":"), // negative lookup
-    SEPARATOR("obj-opener", (c) -> "\"".indexOf((char)c) == -1, ":"), // negative lookup
-    ARR_START("obj-opener", (c) -> " [\t\n".indexOf((char)c) > -1, "\""),
-    ARR_END("obj-opener", (c) -> " ]\t\n".indexOf((char)c) > -1, "\""),
-    LITERAL("obj-opener", (c) -> " ]\t\n".indexOf((char)c) > -1, "\""),
-    OBJ_END("obj-opener", (c) -> " }\t\n".indexOf((char)c) > -1, "");
+    OBJ_START(
+            (c) -> " {\t\n".indexOf((char)c) > -1,
+            "\"",
+            Pattern.compile("abc")
+    ),
+    NAME(
+            (c) -> "\"".indexOf((char)c) == -1,
+            ":",
+            Pattern.compile("abc")
+    ), // negative lookup
+    SEPARATOR(
+            (c) -> "\"".indexOf((char)c) == -1,
+            ":",
+            Pattern.compile("abc")
+    ), // negative lookup
+    ARR_START(
+            (c) -> " [\t\n".indexOf((char)c) > -1,
+            "\"",
+            Pattern.compile("abc")
+    ),
+    ARR_END(
+            (c) -> " ]\t\n".indexOf((char)c) > -1,
+            "\"",
+            Pattern.compile("abc")
+    ),
+    LITERAL(
+            (c) -> " ]\t\n".indexOf((char)c) > -1,
+            "\"",
+            null
+    ),
+    OBJ_END(
+            (c) -> " }\t\n".indexOf((char)c) > -1,
+            "",
+            Pattern.compile("abc")
+    );
 
-    private final String name;
-    private final Predicate p;
-    private final String checkPoints;
+    final Predicate p;
+    final String checkPoint;
+    final Pattern needle;
 
 
-    JsonAreaType(String name, Predicate p, String checkPoints) {
-        this.name = name;
+    JsonAreaType(Predicate p, String checkPoint, Pattern needle) {
         this.p = p;
-        this.checkPoints = checkPoints;
+        this.checkPoint = checkPoint;
+        this.needle = needle;
     }
-
-    boolean isCharValid(char c) {
-        return p.test(c);
-    }
-
-    boolean isCheckPoint(char c) {
-        return checkPoints.indexOf(c) > -1;
-    }
-
-    @Override public String toString() { return name; }
 }
