@@ -30,7 +30,11 @@ import java.util.stream.Stream;
  */
 public class JsonBasicParser extends AbstractJsonParser {
 
-    JsonBasicParser(Stream<String> data) {
+    private JsonBasicParser(Stream<String> data) {
         super(data);
+    }
+
+    static JsonParser of(Stream<String> data) {
+        return new JsonBasicParser(data);
     }
 }

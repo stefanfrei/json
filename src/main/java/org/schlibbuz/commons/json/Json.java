@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.schlibbuz.commons.json.parser.JsonParserFax;
+import org.schlibbuz.commons.json.parser.JsonParser;
 
 /**
  * write json map from json-file
@@ -53,7 +53,7 @@ public class Json {
      * @throws IOException - in case the file is not found or is not readable
      */
     private Json(String fileName) throws IOException {
-        m = JsonParserFax.createMapFrom(new File(fileName));
+        m = JsonParser.mapOf(new File(fileName));
     }
 
     /**
@@ -62,7 +62,7 @@ public class Json {
      * @throws IOException - in case the file is not found or is not readable
      */
     private Json(File f) throws IOException {
-        m = JsonParserFax.createMapFrom(f);
+        m = JsonParser.mapOf(f);
     }
 
     /**
