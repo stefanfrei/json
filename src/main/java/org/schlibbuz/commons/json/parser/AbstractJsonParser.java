@@ -20,38 +20,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.schlibbuz.commons.json;
+package org.schlibbuz.commons.json.parser;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
+import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 /**
- * Test for Json-class
+ *
  * @author Stefan Frei <stefan.a.frei@gmail.com>
  */
-public class JsonTest {
+class AbstractJsonParser implements JsonParser {
 
     /**
      * logger
      */
-    private static final Logger w = LogManager.getLogger(JsonTest.class);
+    private final static Logger w = LogManager.getLogger(AbstractJsonParser.class);
 
-    /**
-     * the file resource to use
-     */
-    private static final File JSON_FILE = new File("src/test/resources/simple2.json");
+    final Stream<String> data;
 
-    /**
-     * tests all kinds of stuff
-     * @throws IOException - in case the file is not found or is not readable
-     */
-    @DataProvider
-    @Test
-    public void blaa() throws IOException {
-        var i = Json.of(JSON_FILE);
+
+    AbstractJsonParser(Stream<String> data) {
+        this.data = data;
+    }
+
+    public void eat(String line) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Map<String, String> getJsonMap() {
+        data.forEachOrdered(w::trace);
+        return Collections.emptyMap();
     }
 }

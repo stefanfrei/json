@@ -22,36 +22,40 @@
  */
 package org.schlibbuz.commons.json;
 
-import java.io.File;
-import java.io.IOException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import java.util.function.Predicate;
 
 /**
- * Test for Json-class
+ *
  * @author Stefan Frei <stefan.a.frei@gmail.com>
  */
-public class JsonTest {
+public enum JsonAreaType {
 
-    /**
-     * logger
-     */
-    private static final Logger w = LogManager.getLogger(JsonTest.class);
+    OBJ_START("obj-opener", (c) -> " {\t\n".indexOf((char)c) > -1, "\""),
+    NAME("obj-opener", (c) -> "\"".indexOf((char)c) == -1, ":"), // negative lookup
+    SEPARATOR("obj-opener", (c) -> "\"".indexOf((char)c) == -1, ":"), // negative lookup
+    ARR_START("obj-opener", (c) -> " [\t\n".indexOf((char)c) > -1, "\""),
+    ARR_END("obj-opener", (c) -> " ]\t\n".indexOf((char)c) > -1, "\""),
+    LITERAL("obj-opener", (c) -> " ]\t\n".indexOf((char)c) > -1, "\""),
+    OBJ_END("obj-opener", (c) -> " }\t\n".indexOf((char)c) > -1, "");
 
-    /**
-     * the file resource to use
-     */
-    private static final File JSON_FILE = new File("src/test/resources/simple2.json");
+    private final String name;
+    private final Predicate p;
+    private final String checkPoints;
 
-    /**
-     * tests all kinds of stuff
-     * @throws IOException - in case the file is not found or is not readable
-     */
-    @DataProvider
-    @Test
-    public void blaa() throws IOException {
-        var i = Json.of(JSON_FILE);
+
+    JsonAreaType(String name, Predicate p, String checkPoints) {
+        this.name = name;
+        this.p = p;
+        this.checkPoints = checkPoints;
     }
+
+    boolean isCharValid(char c) {
+        return p.test(c);
+    }
+
+    boolean isCheckPoint(char c) {
+        return checkPoints.indexOf(c) > -1;
+    }
+
+    @Override public String toString() { return name; }
 }

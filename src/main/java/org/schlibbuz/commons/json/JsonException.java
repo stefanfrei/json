@@ -5,12 +5,15 @@
  */
 package org.schlibbuz.commons.json;
 
+import java.io.IOException;
+
 /**
  *
  * @author Stefan Frei <stefan.a.frei@gmail.com>
  */
-public class JsonException extends Exception {
+public class JsonException extends IOException {
 
+    public JsonException() { super(); }
     public JsonException(String message) {
         super(message);
     }

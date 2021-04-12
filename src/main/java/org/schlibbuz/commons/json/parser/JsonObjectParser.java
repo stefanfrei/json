@@ -20,38 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.schlibbuz.commons.json;
+package org.schlibbuz.commons.json.parser;
 
-import java.io.File;
-import java.io.IOException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import java.util.stream.Stream;
 
 /**
- * Test for Json-class
+ *
  * @author Stefan Frei <stefan.a.frei@gmail.com>
  */
-public class JsonTest {
+public class JsonObjectParser extends AbstractJsonParser {
 
-    /**
-     * logger
-     */
-    private static final Logger w = LogManager.getLogger(JsonTest.class);
-
-    /**
-     * the file resource to use
-     */
-    private static final File JSON_FILE = new File("src/test/resources/simple2.json");
-
-    /**
-     * tests all kinds of stuff
-     * @throws IOException - in case the file is not found or is not readable
-     */
-    @DataProvider
-    @Test
-    public void blaa() throws IOException {
-        var i = Json.of(JSON_FILE);
+    public JsonObjectParser(Stream<String> data) {
+        super(data.parallel());
     }
 }
