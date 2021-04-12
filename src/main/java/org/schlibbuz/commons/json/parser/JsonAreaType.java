@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.schlibbuz.commons.json;
+package org.schlibbuz.commons.json.parser;
 
 import java.util.function.Predicate;
 
