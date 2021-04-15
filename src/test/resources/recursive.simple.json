@@ -1,0 +1,20 @@
+{
+    "a_o": {
+        "b_o_o": {
+            "c_o_o_o": {
+                "d_o_o_o_o": "needle"
+            },
+            "c_o_o_t": {
+                "d_o_o_o_o": "needle",
+                "d_o_o_o_t": "needle"
+            }
+        },
+        "b_o_t": {
+            "c_o_o_o": {
+                "d_o_o_o_o": "needle"
+            }
+        }
+    },
+    "a_t": "needle",
+    "a_f": "needle"
+}
