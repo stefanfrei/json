@@ -22,6 +22,8 @@
  */
 package org.schlibbuz.commons.json.parser;
 
+import org.schlibbuz.commons.json.JsonException;
+
 /**
  *
  * @author Stefan Frei <stefan.a.frei@gmail.com>

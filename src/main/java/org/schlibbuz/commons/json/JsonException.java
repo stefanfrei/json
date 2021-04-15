@@ -20,12 +20,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.schlibbuz.commons.json.parser;
+package org.schlibbuz.commons.json;
+
+import java.io.IOException;
 
 /**
  *
  * @author Stefan Frei <stefan.a.frei@gmail.com>
  */
-public class ParserRuleSet {
+public class JsonException extends IOException {
 
+    public JsonException() { super(); }
+    public JsonException(String message) {
+        super(message);
+    }
 }

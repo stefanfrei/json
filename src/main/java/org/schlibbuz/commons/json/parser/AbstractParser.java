@@ -26,19 +26,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  *
  * @author Stefan Frei <stefan.a.frei@gmail.com>
  */
 abstract class AbstractParser implements JsonParser {
-
-    /**
-     * logger
-     */
-    private final static Logger w = LogManager.getLogger(AbstractParser.class);
 
     final Map<String,String> map;
     final File f;
