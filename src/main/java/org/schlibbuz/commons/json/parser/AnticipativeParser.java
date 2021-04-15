@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.schlibbuz.commons.json.parser.area;
-
+package org.schlibbuz.commons.json.parser;
 
 /**
  *
  * @author Stefan Frei <stefan.a.frei@gmail.com>
  */
-abstract class AbstractArea implements JsonArea {
+public class AnticipativeParser {
 
 }

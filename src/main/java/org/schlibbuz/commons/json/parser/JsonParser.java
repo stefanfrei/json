@@ -64,16 +64,9 @@ public interface JsonParser {
      * @throws IOException - in case of error
      */
     static Map<String, String> mapOf(File f) throws IOException {
-        try (
-                FileInputStream stream = new FileInputStream(f);
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(stream, DEFAULT_CHARSET)
-                );
-        ) {
-            if (f.length() > ONE_MB) {
-                return ThreadedParser.of(reader.lines()).buildJsonMap();
-            }
-            return BasicParser.of(reader.lines()).buildJsonMap();
-        } catch(IOException e) { throw new IOException(e); }
+        if (f.length() > ONE_MB) {
+            return ThreadedParser.of(f).buildJsonMap();
+        }
+        return BasicParser.of(f).buildJsonMap();
     }
 }

@@ -22,8 +22,8 @@
  */
 package org.schlibbuz.commons.json.parser;
 
+import java.io.File;
 import java.util.Map;
-import java.util.stream.Stream;
 
 /**
  *
@@ -31,12 +31,12 @@ import java.util.stream.Stream;
  */
 public class ThreadedParser extends AbstractParser {
 
-    private ThreadedParser(Stream<String> data) {
-        super(data.parallel());
+    private ThreadedParser(File f) {
+        super(f);
     }
 
-    static ThreadedParser of(Stream<String> data) {
-        return new ThreadedParser(data);
+    static ThreadedParser of(File f) {
+        return new ThreadedParser(f);
     }
 
     @Override

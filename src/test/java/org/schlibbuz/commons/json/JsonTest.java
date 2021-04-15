@@ -26,8 +26,6 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.schlibbuz.commons.json.parser.area.JsonArea;
-import org.schlibbuz.commons.json.parser.area.ObjOpener;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -51,10 +49,8 @@ public class JsonTest {
      * tests all kinds of stuff
      * @throws IOException - in case the file is not found or is not readable
      */
-    @DataProvider
     @Test
     public void blaa() throws IOException {
-        JsonArea ja = new ObjOpener();
-        ja.validate(" { \"");
+        Json.of(JSON_FILE);
     }
 }

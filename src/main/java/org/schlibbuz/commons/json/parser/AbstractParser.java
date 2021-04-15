@@ -22,9 +22,10 @@
  */
 package org.schlibbuz.commons.json.parser;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,20 +40,14 @@ abstract class AbstractParser implements JsonParser {
      */
     private final static Logger w = LogManager.getLogger(AbstractParser.class);
 
-    final Map<String,String> m;
-    final Stream<String> data;
-
-    JsonAreaType jat;
+    final Map<String,String> map;
+    final File f;
 
 
-    AbstractParser(Stream<String> data) {
-        m = new HashMap<>();
-        this.data = data;
+    AbstractParser(File f) {
+        map = new HashMap<>();
+        this.f = f;
     }
 
-    abstract Map<String, String> buildJsonMap();
-
-    int findCheckpoint(String s) {
-        return s.indexOf(jat.checkPoint);
-    }
+    abstract Map<String, String> buildJsonMap() throws IOException ;
 }
